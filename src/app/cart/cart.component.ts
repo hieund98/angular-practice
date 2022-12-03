@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CartService } from '../cart.service';
+import { OrderService } from '../order.service';
 import { FormBuilder } from '@angular/forms';
-
+import { Order } from '../products';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -17,9 +18,13 @@ export class CartComponent {
 
   constructor(
     private cartService: CartService,
+    private orderService: OrderService,
     private formBuilder: FormBuilder
   ) {}
-
+  addToOrderList(order: Order) {
+    this.orderService.addToList(order);
+    window.alert('Your order has been added!');
+  }
   onSubmit(): void {
     // Process checkout data here
     this.items = this.cartService.clearCart();

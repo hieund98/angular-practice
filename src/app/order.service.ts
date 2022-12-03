@@ -1,4 +1,4 @@
-import { Product } from './products';
+import { Order } from './products';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,17 +7,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class OrderService {
-  items: Product[] = [];
+  items: Order[] = [];
   constructor(private http: HttpClient) {}
-  /* . . . */
-  getShippingPrices() {
-    return this.http.get<{ type: string; price: number }[]>(
-      '/assets/shipping.json'
-    );
-  }
 
-  addToList(product: Product) {
-    this.items.push(product);
+  addToList(order: Order) {
+    this.items.push(order);
   }
 
   getList() {
