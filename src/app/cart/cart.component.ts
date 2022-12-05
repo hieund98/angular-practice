@@ -10,7 +10,7 @@ import { Order } from '../products';
 })
 export class CartComponent {
   items = this.cartService.getItems();
-
+  list = this.orderService.getList();
   checkoutForm = this.formBuilder.group({
     name: '',
     address: '',
@@ -27,8 +27,15 @@ export class CartComponent {
   }
   onSubmit(): void {
     // Process checkout data here
+    let order = <Order>{
+      name: this.checkoutForm.value.name,
+      address: this.checkoutForm.value.address,
+      list: this.items,
+    };
+    this.addToOrderList(order);
+
     this.items = this.cartService.clearCart();
-    console.warn('Your order has been submitted', this.checkoutForm.value);
+    console.warn('Your order has been submitted', this.checkoutForm.value.name);
     this.checkoutForm.reset();
   }
 }

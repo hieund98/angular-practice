@@ -17,3 +17,11 @@
 
   <button class="button" type="submit">Purchase</button>
 </form>
+<div *ngFor="let order of list">
+  <h3>
+    <a>
+      {{ order.name }}
+    </a>
+    <p>Description: {{ order.address }}</p>
+  </h3>
+</div>
