@@ -4,6 +4,7 @@ export interface Product {
   price: number;
   description: string;
 }
+
 export interface Order {
   list: Product[];
   name: string;

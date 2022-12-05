@@ -5,7 +5,7 @@
   <span>{{ shipping.price | currency }}</span>
 </div>
 <h2>Products</h2>
-<div *ngFor="let product of products">
+<div *ngFor="let product of listProducts  | async">
   <h3>
     <a
       [title]="product.name + ' details'"
@@ -13,6 +13,7 @@
     >
       {{ product.name }}
     </a>
+    <p >Price: {{ product.price }}</p>
     <p *ngIf="product.description">Description: {{ product.description }}</p>
     <button type="button" (click)="share()">Share</button>
     <br />

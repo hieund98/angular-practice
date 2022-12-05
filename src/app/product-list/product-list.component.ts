@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Product, products } from '../products';
 import { Observable } from 'rxjs';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,11 +13,13 @@ export class ProductListComponent {
   products = products;
 
   shippingCosts!: Observable<{ type: string; price: number }[]>;
+  listProducts!: Observable<Product[]>;
 
   ngOnInit(): void {
     this.shippingCosts = this.cartService.getShippingPrices();
+    this.listProducts = this.productService.getListProduct();
   }
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,private productService: ProductService) {}
   share() {
     window.alert('The product has been shared!');
   }
