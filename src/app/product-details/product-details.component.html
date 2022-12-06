@@ -1,7 +1,18 @@
 <h2>Product Details</h2>
 
-<div *ngIf="product">
-  <h3>{{ product.name }}</h3>
-  <h4>{{ product.price | currency }}</h4>
-  <p>{{ product.description }}</p>
-</div>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()" *ngIf="product" >
+  <div>
+    <label for="name"> Name </label>
+    <input id="name" type="text" formControlName="name" [(ngModel)]="product.name"/>
+  </div>
+  <div>
+    <label for="price"> Price </label>
+    <input id="price" type="number" formControlName="price" [(ngModel)]="product.price"/>
+  </div>
+  <div>
+    <label for="description"> Description </label>
+    <input id="description" type="text" formControlName="description"  [(ngModel)]="product.description"/>
+  </div>
+
+  <button class="button" type="submit">Update</button>
+</form>

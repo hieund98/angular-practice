@@ -1,36 +1,70 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Product } from './products';
-import {catchError, Observable, of, tap} from 'rxjs';
+import { ApiService } from './api.service';
+import {Order, Product} from './products';
+import {catchError, map, Observable, of, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private http: HttpClient) {}
-  /** GET heroes from the server */
-  getListProduct(): Observable<Product[]> {
-    let url = "http://localhost:8080/api/products";
-    return this.http.get<Product[]>(url)
-        .pipe(
-            tap(_ => console.log('fetched heroes')),
-            catchError(this.handleError<Product[]>('getListProduct', []))
-        );
-  }
-  /* . . . */
-  getProducts() {
-    let headers = new HttpHeaders({
-      'content-type': 'application/json',
-    });
+  path = 'api/products';
+  items: Product[] = [];
+  constructor(private apiService: ApiService) {}
 
-    this.http
-      .get<any>('http://localhost:8080/api/products', {
-        headers: headers,
-      })
-      .subscribe((data) => {
-        console.log(data);
-        return data.data;
-      });
+  async addToList(prod: Product) {
+    let url = 'http://localhost:8080/api/products'
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(prod)
+    }
+
+    const rawResponse = await fetch(url, options);
+    const response = await rawResponse.json();
+
+    return true;
+  }
+
+  /* . . . */
+  async getProducts() {
+    const options = {
+      params: {},
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+
+    return this.apiService.get(this.path, options, map((response: any) => {
+      return response;
+        })
+    );
+  }
+  async removeProductById(id: number) {
+    let url = 'http://localhost:8080/api/products/' + id;
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const rawResponse = await fetch(url, options).then(async (response) => {
+      console.log(response)
+    });
+  }
+  async getByProductId(id: number) {
+    const options = {
+      params: {},
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+
+    return this.apiService.get(this.path + '/' + id, options, map((response: any) => {
+          return response;
+        })
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

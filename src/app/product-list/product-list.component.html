@@ -5,6 +5,22 @@
   <span>{{ shipping.price | currency }}</span>
 </div>
 <h2>Products</h2>
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name"> Name </label>
+    <input id="name" type="text" formControlName="name" />
+  </div>
+  <div>
+    <label for="price"> Price </label>
+    <input id="price" type="number" formControlName="price" />
+  </div>
+  <div>
+    <label for="description"> Description </label>
+    <input id="description" type="text" formControlName="description" />
+  </div>
+
+  <button class="button" type="submit">Add</button>
+</form>
 <div *ngFor="let product of listProducts  | async">
   <h3>
     <a
@@ -15,7 +31,7 @@
     </a>
     <p >Price: {{ product.price }}</p>
     <p *ngIf="product.description">Description: {{ product.description }}</p>
-    <button type="button" (click)="share()">Share</button>
+    <button type="button" (click)="delete(product)">Remove</button>
     <br />
     <br />
     <button type="button" (click)="addToCart(product)">Add to Cart</button>
