@@ -22,9 +22,7 @@ export class ProductService {
     }
 
     const rawResponse = await fetch(url, options);
-    const response = await rawResponse.json();
-
-    return true;
+    return await rawResponse.json();
   }
 
   /* . . . */

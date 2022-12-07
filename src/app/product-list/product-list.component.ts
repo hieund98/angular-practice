@@ -18,11 +18,11 @@ export class ProductListComponent {
     description: '',
   });
 
-  shippingCosts!: Observable<{ type: string; price: number }[]>;
+  shippingCosts!: Observable<any[]>;
   listProducts!: Observable<Product[]>;
 
   async ngOnInit(): Promise<void> {
-    this.shippingCosts = this.cartService.getShippingPrices();
+    this.shippingCosts = await this.cartService.getShipPrices();
     this.listProducts = await this.productService.getProducts();
   }
 
