@@ -23,7 +23,8 @@ export class CartService {
     const options = {
       params: {},
       headers: {
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt-token'),
       }
     };
 

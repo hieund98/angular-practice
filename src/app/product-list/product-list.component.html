@@ -29,7 +29,7 @@
     >
       {{ product.name }}
     </a>
-    <p >Price: {{ product.price }}</p>
+    <p >Price: {{ product.price | currency }}</p>
     <p *ngIf="product.description">Description: {{ product.description }}</p>
     <button type="button" (click)="delete(product)">Remove</button>
     <br />

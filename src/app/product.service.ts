@@ -16,7 +16,8 @@ export class ProductService {
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        ContentType: 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt-token'),
       },
       body: JSON.stringify(prod)
     }
@@ -30,7 +31,8 @@ export class ProductService {
     const options = {
       params: {},
       headers: {
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt-token'),
       }
     };
 
@@ -44,7 +46,8 @@ export class ProductService {
     const options = {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        ContentType: 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt-token'),
       }
     }
     const rawResponse = await fetch(url, options).then(async (response) => {
@@ -55,7 +58,8 @@ export class ProductService {
     const options = {
       params: {},
       headers: {
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt-token'),
       }
     };
 

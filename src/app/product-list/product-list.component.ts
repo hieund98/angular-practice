@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CartService } from '../cart.service';
-import {Order, Product, products} from '../products';
+import { Order, Product, products} from '../products';
 import { Observable } from 'rxjs';
 import { ProductService } from '../product.service';
 import { FormBuilder } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-list',
@@ -42,9 +43,9 @@ export class ProductListComponent {
   }
   async addProduct(prod: Product) {
       await this.productService.addToList(prod).then(async () => {
-      this.listProducts = await this.productService.getProducts();
-      window.alert('Product has been added!');
-      this.addForm.reset();
+        this.listProducts = await this.productService.getProducts();
+        window.alert('Product has been added!');
+        this.addForm.reset();
     });
   }
   onSubmit(): void {
